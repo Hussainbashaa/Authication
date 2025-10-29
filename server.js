@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import { getAllUsers, registerUser } from "./controllers/user.js";
@@ -8,6 +9,13 @@ const app = express();
 config({ path: ".env" });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URL, {
