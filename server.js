@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { config } from "dotenv";
-import { registerUser } from "./controllers/user.js";
+import { getAllUsers, registerUser } from "./controllers/user.js";
 import { loginUser } from "./controllers/login.js";
 
 const app = express();
@@ -17,6 +17,7 @@ mongoose
   .catch((error) => console.log(error));
 app.post("/user/register", registerUser);
 app.post("/user/login", loginUser);
+app.get("/user/allUsers", getAllUsers);
 
 const port = process.env.PORT;
 app.listen(port, () => {
